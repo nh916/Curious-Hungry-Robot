@@ -1,0 +1,124 @@
+import java.awt.*;
+import java.util.Random;
+
+public class Robot {
+
+    double energy = 200;
+
+    int currentX = 0;
+    int currentY = 0;
+    Point walk = new Point(currentX,currentY);
+
+
+
+    public Robot(){
+
+    }
+
+
+
+//currently this is not setting the new position so after each run it keeps starting back from 0,0
+    private void curious(){
+        Random random = new Random();
+        int randomCase = random.nextInt(9 - 1)+ 1;
+
+        switch (randomCase){
+            case 1: walk.setLocation(currentX,currentY);
+                    energy = energy - 0;
+                break;
+            case 2: walk.setLocation(currentX + 13,currentY);
+                    energy = energy - 13;
+                break;
+            case 3: walk.setLocation(currentX - 13,currentY);
+                    energy = energy - 13;
+                break;
+            case 4: walk.setLocation(currentX,currentY + 13);
+                energy = energy - 13;
+                break;
+            case 5: walk.setLocation(currentX,currentY - 13);
+                    energy = energy - 13;
+                break;
+            case 6: walk.setLocation(currentX + 13,currentY + 13);
+                    energy = energy - 26;
+                break;
+            case 7: walk.setLocation(currentX - 13,currentY - 13);
+                    energy = energy - 26;
+                break;
+            case 8: walk.setLocation(currentX + 13,currentY - 13);
+                    energy = energy - 26;
+                break;
+            case 9: walk.setLocation(currentX - 13,currentY + 13);
+                    energy = energy - 13;
+                break;
+        }
+        System.out.println(energy);
+        System.out.println(walk);
+    }
+
+
+    private void hungry(){
+//        uses its memory to move toward last remembered energy location
+//          the memory needs to be a stack
+//        if it finds new energy it remembers that and then keeps going towards the goal it had
+//        if there is no remembered memory then it just keeps being curious
+
+    }
+
+    private void inactive(){
+//    end the simmulation
+        System.out.println(walk);
+        System.out.println(energy);
+    }
+
+
+
+
+
+    private void states(){
+        Robot chr = new Robot();
+
+        while (chr.energy/200 > 0.50){
+            chr.curious();
+        }
+        while (chr.energy/200 <= 0.50 && chr.energy/200 > 0){
+//            this needs to be hungry but currently there is nothing in hungry. This avoids infinite loop
+            chr.curious();
+        }
+        if (chr.energy/200 <= 0.0){
+            chr.inactive();
+        }
+    }
+
+
+
+
+
+
+
+    public static void main (String[] args){
+        Robot blah = new Robot();
+        blah.states();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
